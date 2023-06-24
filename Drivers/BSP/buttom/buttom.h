@@ -27,7 +27,7 @@
 } while (0)
 
 #define KEY0_IRQn EXTI4_IRQn
-#define KEY0_IRQHandler(void)  (EXTI4_IRQHandler())
+#define KEY0_IRQHandler()  (EXTI4_IRQHandler())
 
 
 void KEY0_IRQHandler(void);

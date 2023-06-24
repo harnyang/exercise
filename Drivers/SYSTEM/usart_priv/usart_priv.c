@@ -43,10 +43,16 @@ void HAL_USART_MspInit(USART_HandleTypeDef *husart)
 
 void USART_UX_IRQHandler();
 {   
-    HAL_UART_IRQHandler(&USART_HandleStructure);
+    HAL_UART_IRQHandler(&USART_HandleStructure); //调用HAL库的中断处理函数里面会对接受进行回调
+
     while (HAL_UART_Receive_IT(&USART_HandleStructure,ux_rx_buffer,RXBUFFERSIZE)!=HAL_OK)
     {
-        /* code */
+        
     }
+    
+}
+//在 HAL_UART_IRQHadnler()之中调用的UART_RECIVE_IT之中被调用//_需要注意的是这些函数都不需要声明因为官方已经声明过了。
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
     
 }

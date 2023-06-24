@@ -46,7 +46,7 @@ void KEY0_IRQHandler (void)//事件中断处理函数被宏重定义
 
 void Buttom_Control_LED(void)
 {
-    if(HAL_GPIO_ReadPin(KEY0_GPIO_PIN)!=1)
+    if(HAL_GPIO_ReadPin(KEY0_GPIO_PORT,KEY0_GPIO_PIN)!=1)
     {
         delay_ms(20);//延迟用于消抖
         if (HAL_GPIO_ReadPin(KEY0_GPIO_PIN)!=1)

@@ -8,7 +8,7 @@
 #define USART1_RX_GPIO_PIN GPIO_PIN_2///
 #define USART1_RX_GPIO_ENABLE() do\
 {\
-    __HAL_RCC_GPIOA_CLK_ENABLE();\///
+    __HAL_RCC_GPIOA_CLK_ENABLE();\ ///
 } while (0);
 
 
@@ -20,10 +20,10 @@
 } while (0);
 
 #define USART_UX_IRQn  USART1_IRQn 
-#define USART_UX_Handler() USART1_IRQHandler()
+#define USART_UX_IRQHandler()  (USART1_IRQHandler())
 #define USART_UX  USART1
 
-#define BUFFERSIZE 1
+#define RXBUFFERSIZE 1
 #define USART_RECIVE_LENGTH  200 //最大接受字节数
 
 #define USART_CLK_ENBALE() do\

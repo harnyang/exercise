@@ -18,16 +18,16 @@
 #define KEY0_RCC_CLK_ENABLE()   do\
 {\
     __HAL_RCC_GPIOE_CLK_ENABLE();\
-} while (0);
+} while (0)
 
 
-#define KEY0_Handler() do
-{
-    EXTI4_IRQHandler();
+#define KEY0_Handler() do\
+{\
+    EXTI4_IRQHandler();\
+} while (0)
 
-} while (0);
 #define KEY0_IRQn EXTI4_IRQn
-#define KEY0_IRQHandler()  EXTI4_IRQHandler()
+#define KEY0_IRQHandler(void)  (EXTI4_IRQHandler())
 
 
 void KEY0_IRQHandler(void);

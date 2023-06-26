@@ -1,6 +1,7 @@
 #ifndef  __USART_
 #define  __USART_
 
+#include <stdio.h>
 #include "./SYSTEM/sys/sys.h"
 #include "./SYSTEM/delay/delay.h"
 
@@ -30,5 +31,5 @@
 {\
     __HAL_RCC_USART1_CLK_ENABLE();\
 } while (0);
-
+char * ux_rx_buffer[1]={0};
 #endif

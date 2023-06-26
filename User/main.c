@@ -2,6 +2,7 @@
 #include "./SYSTEM/usart/usart.h"
 #include "./SYSTEM/delay/delay.h"
 #include "./BSP/led/led.h"
+#include "usart_priv.h"
 void led_init(void); /* LED ??????? */
 //int main(void)
 //{
@@ -32,4 +33,6 @@ int main(void)
 	delay_init(72);
 	led_init();
 	led_breath();
+	usart_init(115000);
+	
 }

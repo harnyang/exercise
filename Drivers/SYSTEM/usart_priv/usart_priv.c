@@ -1,6 +1,12 @@
 #include "usart_priv.h"
 
+/* 用于保存接受状态和接受数据存放的地址,并且对USART句柄处理类型进行了定义 */
+uint16_t g_usart_rx_stat=0;
+uint8_t g_rx_buffer[RXBUFFERSIZE]={0};
 USART_HandleTypeDef USART_HandleStructure;
+
+uint8_t g_usart_rx_buf[USART_RECIVE_LENGTH];
+
 void usart_init(uint32_t BaudRate)
 {
     USART_InitTypeDef USART1_InitStructure;
@@ -54,5 +60,42 @@ void USART_UX_IRQHandler();
 //在 HAL_UART_IRQHadnler()之中调用的UART_RECIVE_IT之中被调用//_需要注意的是这些函数都不需要声明因为官方已经声明过了。
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
+    if (huart->Instance==USART_UX)
+    {
+        if ((g_usart_rx_stat & 0x8000) == 0)//如果接受未完成
+        {
+            if ((g_usart_rx_stat & 0x4000)==1) //如果接收到回车键；
+            {
+                if (g_rx_buffer[0] == 0x0a)//如果接受到的是换行减
+                {
+                    g_usart_rx_stat |=0x8000;
+                }
+                else
+                {
+                    g_usart_rx_stat=0;
+                }
+            }
+            else
+            {
+                if (g_rx_buffer[0] == 0x0d)//如果接收到的是回车键
+                {
+                    g_usart_rx_stat |=0x4000;
+                }
+                else
+                {
+                    g_usart_rx_buf[g_usart_rx_stat & 0x3FFF] = g_rx_buffe[0]
+                    g_usart_rx_stat++;
+
+                    if (g_usart_rx_stat > (USART_RECIVE_LENGTH - 1))
+                    {
+                        g_usart_rx_stat = 0;             /* 接收数据错误,重新开始接收 */
+                    }
+                }
+                
+            }
+            
+        }
+        
+    }
     
 }
